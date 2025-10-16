@@ -2,9 +2,9 @@ FROM node:16
 
 WORKDIR /tmp
 
-RUN sed -i 's/deb.debian.org/mirrors.163.com/g' /etc/apt/sources.list \
-    # && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    # && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
+# 替换为阿里云的Debian buster源（仍维护旧版本）
+RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list \
+    && sed -i 's/security.debian.org/mirrors.aliyun.com\/debian-security/g' /etc/apt/sources.list \
     && apt-get update \
     && apt-get install -y --no-install-recommends apt-utils \
     && apt-get install -y \
