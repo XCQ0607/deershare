@@ -29,7 +29,11 @@ WORKDIR /app
 COPY server/package.json ./
 COPY server/yarn.lock ./
 # 切换到新的npmmirror镜像源（解决证书过期问题）
-RUN yarn config set registry https://registry.npmmirror.com && \
+# 关键步骤：替换yarn.lock中硬编码的旧镜像源地址
+RUN sed -i 's#https://registry.npm.taobao.org#https://registry.npmmirror.com#g' yarn.lock && \
+    # 确认全局registry配置
+    yarn config set registry https://registry.npmmirror.com && \
+    # 安装依赖
     yarn
 
 RUN yarn
