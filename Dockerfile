@@ -20,8 +20,17 @@ RUN apt-get install ./google-chrome-stable_current_amd64.deb
 
 WORKDIR /app
 
+# 原步骤：
+# COPY server/package.json ./
+# COPY server/yarn.lock ./
+# RUN yarn
+
+# 修改后：
 COPY server/package.json ./
 COPY server/yarn.lock ./
+# 切换到新的npmmirror镜像源（解决证书过期问题）
+RUN yarn config set registry https://registry.npmmirror.com && \
+    yarn
 
 RUN yarn
 
