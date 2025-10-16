@@ -37,4 +37,4 @@ jobs:
           file: ./Dockerfile # Dockerfile路径
           platforms: linux/amd64,linux/arm64 # 多架构支持
           push: true
-          tags: ${{ secrets.DOCKERHUB_USER }}/disk:latest
+          tags: ${{ secrets.DOCKERHUB_USER }}/deer:latest
